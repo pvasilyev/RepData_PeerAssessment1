@@ -41,6 +41,8 @@ hist(total_steps_by_date$steps, col = "steelblue3",
      breaks = 10
 )
 ```
+![](hist.png)
+
 3. Calculate and report the mean and median of the total number of steps taken per day.
 ```r
 mean_total_steps <- mean(total_steps_by_date$steps)
@@ -69,6 +71,7 @@ plot(strptime(mean_steps_by_interval$interval, "%H%M"),
     ylab = "Mean Steps"
 )
 ```
+![](daily-pattern.png)
 2. Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 ```r
 > mean_steps_by_interval[which.max(mean_steps_by_interval$steps), ]
@@ -114,7 +117,7 @@ median_total_steps_imputed <- median(total_steps_by_date_imputed$steps)
 [1] 10765
 ```
 As we see the numbers don't differ from the ones calculated during step 2.3.
-
+![](activity-inputed.png)
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
@@ -133,7 +136,24 @@ mean_steps_by_weekend <- aggregate(steps ~ interval, data_filled_weekend, mean)
 2. Make a panel plot containing a time series plot (i.e. 𝚝𝚢𝚙𝚎 = "𝚕") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis). See the README file in the GitHub repository to see an example of what this plot should look like using simulated data.
 ```r
 par(mfrow = c(2, 1))
-plot(strptime(mean_steps_by_weekday$interval, "%H%M"), mean_steps_by_weekday$steps, type = "l", xlab = "Time Interval", main = "Week Day", ylab = "Total steps made", col = "blue")
-plot(strptime(mean_steps_by_weekend$interval, "%H%M"), mean_steps_by_weekend$steps, type = "l", xlab = "Time Interval", main = "Week End", ylab = "Total steps made", col = "blue")
+plot(
+    strptime(mean_steps_by_weekday$interval, "%H%M"), 
+    mean_steps_by_weekday$steps, 
+    type = "l", 
+    xlab = "Time Interval", 
+    main = "Week Day", 
+    ylab = "Total steps made", 
+    col = "blue"
+)
+plot(
+    strptime(mean_steps_by_weekend$interval, "%H%M"), 
+    mean_steps_by_weekend$steps, 
+    type = "l", 
+    xlab = "Time Interval", 
+    main = "Week End", 
+    ylab = "Total steps made", 
+    col = "blue"
+)
 par(mfrow = c(1, 1))
 ```
+![](weekday-vs-weekend.png)
